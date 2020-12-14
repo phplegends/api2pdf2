@@ -1,0 +1,16 @@
+{
+    "name": "phplegends/api-2-pdf",
+    "description": "A wrapper package for Api2PDF API",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Wallace Maxters",
+            "email": "wallace.vizerra@donadvice.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "guzzlehttp/guzzle": "^7.2"
+    }
+}
