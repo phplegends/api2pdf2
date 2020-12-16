@@ -1,5 +1,5 @@
 {
-    "name": "phplegends/api-2-pdf",
+    "name": "phplegends/api-2-pdf-v2",
     "description": "A wrapper package for Api2PDF API",
     "type": "library",
     "license": "MIT",
