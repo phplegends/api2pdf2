@@ -16,5 +16,5 @@ $pdf = Api2Pdf::create($apiKey);
 #### Chrome endpoint
 
 ```php
-$pdf->chrome()->generatePdfFromUrl();
+$pdf->chrome()->generatePdfFromUrl('https://google.com');
 ```
