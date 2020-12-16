@@ -9,8 +9,8 @@ namespace PHPLegends\Api2Pdf\V2;
 class Client
 {
     
-    const API_BASE_URL = 'https://httpbin.org/anything/';
-    // const API_BASE_URL = 'https://v2.api2pdf.com/';
+    // const API_BASE_URL = 'https://httpbin.org/anything/';
+    const API_BASE_URL = 'https://v2.api2pdf.com/';
     
     /**
      * @var string
@@ -20,7 +20,7 @@ class Client
     /**
      * @var \GuzzleHttp\Client
      */
-    protected $client;
+    protected $guzzleClient;
 
 
     public function __construct(string $apiKey)
@@ -29,9 +29,9 @@ class Client
     }
 
 
-    protected function getClient() : \GuzzleHttp\Client
+    public function getGuzzleClient() : \GuzzleHttp\Client
     {
-        return $this->client ?: $this->client = new \GuzzleHttp\Client([
+        return $this->guzzleClient ?: $this->guzzleClient = new \GuzzleHttp\Client([
             'base_uri' => static::API_BASE_URL,
             'verify'   => false,
             'headers'  => [
@@ -40,12 +40,15 @@ class Client
         ]);
     }
 
-
     public function request(string $path, array $payload = [], string $method = 'post') : Result
-    {
-        $response = $this->getClient()->{$method}($path, [
-            'json' => $this->buildPayload($payload)
-        ]);
+    {   
+        if ('get' === strtolower($method)) {
+            $body['query'] = $payload;
+        } else {
+            $body['json'] = $this->buildPayload($payload);
+        }
+
+        $response = $this->getGuzzleClient()->{$method}($path, $body);
 
         return $this->prepareResponse($response);
     }

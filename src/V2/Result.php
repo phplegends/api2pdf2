@@ -2,6 +2,8 @@
 
 namespace PHPLegends\Api2Pdf\V2;
 
+use PHPLegends\Api2Pdf\V2\Exceptions\FileUrlNotFoundException;
+
 /**
  * Represents the result of request
  * 
@@ -16,7 +18,7 @@ class Result implements \JsonSerializable, \ArrayAccess
         $this->data = $data;
     }
 
-    public function has(string $key)
+    public function has(string $key): bool
     {
         return isset($this->data[static::buildKey($key)]);
     }
@@ -54,5 +56,22 @@ class Result implements \JsonSerializable, \ArrayAccess
     public function offsetUnset($key)
     {
         throw new \BadMethodCallException(__METHOD__ . ' is disabled');
+    }
+
+
+    /**
+     * Loads the output from "FileUrl"
+     * 
+     * @return string
+     */
+    public function getFileOutput(): string
+    {
+        if (! $this->has('FileUrl')) {
+            throw new FileUrlNotFoundException('FileUrl not found in the result');
+        }
+
+        $response = (new \GuzzleHttp\Client)->get($this->get('FileUrl'));
+
+        return (string) $response->getBody();
     }
 }
