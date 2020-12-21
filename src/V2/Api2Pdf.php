@@ -30,7 +30,7 @@ class Api2Pdf
         return new WkHtmlToPdf($this->getClient());
     }
 
-    public function getClient() : \PHPLegends\Api2Pdf\V2\Client
+    public function getClient() : Client
     {
         return $this->client;
     }
