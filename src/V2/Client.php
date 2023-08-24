@@ -8,8 +8,6 @@ namespace PHPLegends\Api2Pdf\V2;
  */
 class Client
 {
-    
-    // const API_BASE_URL = 'https://httpbin.org/anything/';
     const API_BASE_URL = 'https://v2.api2pdf.com/';
     
     /**
@@ -31,6 +29,7 @@ class Client
 
     public function getGuzzleClient() : \GuzzleHttp\Client
     {
+
         return $this->guzzleClient ?: $this->guzzleClient = new \GuzzleHttp\Client([
             'base_uri' => static::API_BASE_URL,
             'verify'   => false,

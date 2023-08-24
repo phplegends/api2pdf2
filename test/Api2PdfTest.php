@@ -7,7 +7,6 @@ class Api2PdfTest extends TestCase
 {
     public function setUp(): void
     {
-
         $key = getenv('API2PDF_KEY');
         $this->pdf = Api2Pdf::create($key);
     }
